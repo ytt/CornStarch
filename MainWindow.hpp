@@ -8,7 +8,6 @@
 #include "SubscribeData.hpp"
 #include "MyPersistent.hpp"
 
-
 // ビューコントローラとなるウィンドウクラス
 class CMainWindow : public wxFrame
 {
