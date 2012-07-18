@@ -1,13 +1,13 @@
-﻿#include "GetMemberInfoTask.hpp"
+﻿#include "SCGetMemberInfoTask.hpp"
 
 using namespace std;
 
-CGetMemberInfoTask::CGetMemberInfoTask(void)
+CSCGetMemberInfoTask::CSCGetMemberInfoTask(void)
 {
 }
 
 
-CGetMemberInfoTask::~CGetMemberInfoTask(void)
+CSCGetMemberInfoTask::~CSCGetMemberInfoTask(void)
 {
 }
 
@@ -16,7 +16,7 @@ CGetMemberInfoTask::~CGetMemberInfoTask(void)
 
 
 // 初期化を行う
-void CGetMemberInfoTask::init(wxEvtHandler* handler, const wxString& username,
+void CSCGetMemberInfoTask::init(wxEvtHandler* handler, const wxString& username,
     const wxString& basic)
 {
     CSCTask::init(handler, basic);
@@ -28,14 +28,14 @@ void CGetMemberInfoTask::init(wxEvtHandler* handler, const wxString& username,
 
 
 // StarChatに対してリクエストを送信する
-void CGetMemberInfoTask::sendRequestToSC(CSCClient* client)
+void CSCGetMemberInfoTask::sendRequestToSC(CSCClient* client)
 {
     // GETリクエストの送信
     client->sendGetMemInfoRequest(m_username, m_basic);
 }
 
 // HTTPレスポンスを解析してイベントを作成する
-wxThreadEvent* CGetMemberInfoTask::parseHttpResponse(const string& responseBody)
+wxThreadEvent* CSCGetMemberInfoTask::parseHttpResponse(const string& responseBody)
 {
     // イベントの初期化
     CGetMemberInfoEvent* event = new CGetMemberInfoEvent();

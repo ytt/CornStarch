@@ -1,13 +1,13 @@
-﻿#include "GetMessageTask.hpp"
+﻿#include "SCGetMessageTask.hpp"
 
 using namespace std;
 
-CGetMessageTask::CGetMessageTask(void)
+CSCGetMessageTask::CSCGetMessageTask(void)
 {
 }
 
 
-CGetMessageTask::~CGetMessageTask(void)
+CSCGetMessageTask::~CSCGetMessageTask(void)
 {
 }
 
@@ -16,7 +16,7 @@ CGetMessageTask::~CGetMessageTask(void)
 
 
 // 初期化を行う
-void CGetMessageTask::init(wxEvtHandler* handler, const wxString& channel,
+void CSCGetMessageTask::init(wxEvtHandler* handler, const wxString& channel,
     const wxString& basic)
 {
     CSCTask::init(handler, basic);
@@ -28,14 +28,14 @@ void CGetMessageTask::init(wxEvtHandler* handler, const wxString& channel,
 
 
 // StarChatに対してリクエストを送信する
-void CGetMessageTask::sendRequestToSC(CSCClient* client)
+void CSCGetMessageTask::sendRequestToSC(CSCClient* client)
 {
     // GETリクエストの送信
     client->sendGetMessagesRequest(m_channel, m_basic);
 }
 
 // HTTPレスポンスを解析してイベントを作成する
-wxThreadEvent* CGetMessageTask::parseHttpResponse(const string& responseBody)
+wxThreadEvent* CSCGetMessageTask::parseHttpResponse(const string& responseBody)
 {
     // イベントの初期化
     CGetMessageEvent* event = new CGetMessageEvent();

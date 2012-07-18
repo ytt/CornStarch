@@ -1,23 +1,23 @@
 ﻿#pragma once
 #include "SCTask.hpp"
+#include "GetMessageEvent.hpp"
 
 // イベントの宣言
-wxDECLARE_EVENT(myEVT_THREAD_DELETE_PART, wxThreadEvent);
+wxDECLARE_EVENT(myEVT_THREAD_GET_MESSAGE, CGetMessageEvent);
 
-// チャンネルから離脱するためのタスク
-class CPartChannelTask : public CSCTask
+// メッセージ取得を別スレッドで取得するためのタスク
+class CSCGetMessageTask : public CSCTask
 {
 private:
-    wxString m_userName; // ユーザ名
     wxString m_channel; // チャンネル名
 
 public:
-    CPartChannelTask(void);
-    ~CPartChannelTask(void);
+    CSCGetMessageTask(void);
+    ~CSCGetMessageTask(void);
 
     // 初期化を行う
-    void init(wxEvtHandler* handler, const wxString& userName,
-        const wxString& channel, const wxString& basic);
+    void init(wxEvtHandler* handler, const wxString& channel, 
+        const wxString& basic);
 
 private:
 

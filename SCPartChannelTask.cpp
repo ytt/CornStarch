@@ -1,13 +1,13 @@
-﻿#include "PartChannelTask.hpp"
+﻿#include "SCPartChannelTask.hpp"
 
 using namespace std;
 
-CPartChannelTask::CPartChannelTask(void)
+CSCPartChannelTask::CSCPartChannelTask(void)
 {
 }
 
 
-CPartChannelTask::~CPartChannelTask(void)
+CSCPartChannelTask::~CSCPartChannelTask(void)
 {
 }
 
@@ -16,7 +16,7 @@ CPartChannelTask::~CPartChannelTask(void)
 
 
 // 行う処理をセット
-void CPartChannelTask::init(wxEvtHandler* handler, const wxString& userName,
+void CSCPartChannelTask::init(wxEvtHandler* handler, const wxString& userName,
     const wxString& channel, const wxString& basic)
 {
     CSCTask::init(handler, basic);
@@ -29,13 +29,13 @@ void CPartChannelTask::init(wxEvtHandler* handler, const wxString& userName,
 
 
 // StarChatに対してリクエストを送信する
-void CPartChannelTask::sendRequestToSC(CSCClient* client)
+void CSCPartChannelTask::sendRequestToSC(CSCClient* client)
 {
     client->sendPartRequest(m_channel, m_userName, m_basic);
 }
 
 // HTTPレスポンスを解析してイベントを作成する
-wxThreadEvent* CPartChannelTask::parseHttpResponse(const string& responseBody)
+wxThreadEvent* CSCPartChannelTask::parseHttpResponse(const string& responseBody)
 {
     // イベントの初期化
     wxThreadEvent* event = new wxThreadEvent();

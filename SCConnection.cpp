@@ -31,7 +31,7 @@ void CSCConnection::init(void)
 void CSCConnection::startPostMessageTask(wxEvtHandler* handler, 
     const wxString& message, const wxString& channel, const wxString& basic)
 {
-    CPostMessageTask* postMessageTask = new CPostMessageTask();
+    CSCPostMessageTask* postMessageTask = new CSCPostMessageTask();
     postMessageTask->init(handler, channel, basic);
     postMessageTask->setMessage(message);
 
@@ -43,7 +43,7 @@ void CSCConnection::startPostMessageTask(wxEvtHandler* handler,
 void CSCConnection::startGetMessageTask(wxEvtHandler* handler, const wxString& channel,
     const wxString& basic)
 {
-    CGetMessageTask* getMessageTask = new CGetMessageTask();
+    CSCGetMessageTask* getMessageTask = new CSCGetMessageTask();
     getMessageTask->init(handler, channel, basic);
 
     // 別スレッドでの開始
@@ -54,7 +54,7 @@ void CSCConnection::startGetMessageTask(wxEvtHandler* handler, const wxString& c
 void CSCConnection::startGetMemberTask(wxEvtHandler* handler, const wxString& channel,
     const wxString& basic)
 {
-    CGetMemberTask* getMemberTask = new CGetMemberTask();
+    CSCGetMemberTask* getMemberTask = new CSCGetMemberTask();
     getMemberTask->init(handler, channel, basic);
 
     // 別スレッドでの開始
@@ -66,7 +66,7 @@ void CSCConnection::startGetChannelTask(wxEvtHandler* handler, const wxString& u
     const wxString& basic)
 {
 
-    CGetChannelTask* getChannelTask = new CGetChannelTask();
+    CSCGetChannelTask* getChannelTask = new CSCGetChannelTask();
     getChannelTask->init(handler, userName, basic);
 
     // 別スレッドでの開始
@@ -78,7 +78,7 @@ void CSCConnection::startPartTask(wxEvtHandler* handler, const wxString& channel
     const wxString& userName, const wxString& basic)
 {
 
-    CPartChannelTask* partChannelTask = new CPartChannelTask();
+    CSCPartChannelTask* partChannelTask = new CSCPartChannelTask();
     partChannelTask->init(handler, userName, channel, basic);
 
     // 別スレッドでの開始
@@ -90,7 +90,7 @@ void CSCConnection::startJoinTask(wxEvtHandler* handler, const wxString& channel
     const wxString& userName, const wxString& basic)
 {
 
-    CJoinChannelTask* joinChannelTask = new CJoinChannelTask();
+    CSCJoinChannelTask* joinChannelTask = new CSCJoinChannelTask();
     joinChannelTask->init(handler, userName, channel, basic);
 
     // 別スレッドでの開始
@@ -102,7 +102,7 @@ void CSCConnection::startGetMemberInfoTask(wxEvtHandler* handler,
     const wxString& userName, const wxString& basic)
 {
 
-    CGetMemberInfoTask* getInfoTask = new CGetMemberInfoTask();
+    CSCGetMemberInfoTask* getInfoTask = new CSCGetMemberInfoTask();
     getInfoTask->init(handler, userName, basic);
 
     // 別スレッドでの開始
@@ -114,7 +114,7 @@ void CSCConnection::startAuthTask(wxEvtHandler* handler, const wxString& userNam
     const wxString& basic)
 {
     // 初期化
-    m_authTask = new CAuthTask();
+    m_authTask = new CSCAuthTask();
     m_authTask->init(handler, userName, basic);
 
     // 別スレッドでの開始
@@ -132,7 +132,7 @@ void CSCConnection::startStreamTask(wxEvtHandler* handler, const wxString& userN
     }
 
     // ストリームの初期化
-    m_getStreamTask = new CGetStreamTask();
+    m_getStreamTask = new CSCGetStreamTask();
     m_getStreamTask->init(handler, userName, basic);
 
     // 別スレッドでの実行

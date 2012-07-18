@@ -1,22 +1,23 @@
 ﻿#pragma once
 #include "SCTask.hpp"
-#include "GetMemberInfoEvent.hpp"
+#include "AuthEvent.hpp"
 
 // イベントの宣言
-wxDECLARE_EVENT(myEVT_THREAD_GET_MEMBER_INFO, CGetMemberInfoEvent);
+wxDECLARE_EVENT(myEVT_THREAD_GET_PING, CAuthEvent);
 
-// メンバーの情報を取得するためのタスク
-class CGetMemberInfoTask : public CSCTask
+// StarChatのユーザ認証を行うためのタスク
+class CSCAuthTask : public CSCTask
 {
 private:
-    wxString m_username; // ユーザ名
+
+    wxString m_userName; // ユーザ名
 
 public:
-    CGetMemberInfoTask(void);
-    ~CGetMemberInfoTask(void);
+    CSCAuthTask(void);
+    ~CSCAuthTask(void);
 
     // 初期化を行う
-    void init(wxEvtHandler* handler, const wxString& username, 
+    void init(wxEvtHandler* handler, const wxString& userName, 
         const wxString& basic);
 
 private:

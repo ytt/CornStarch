@@ -1,27 +1,23 @@
 ﻿#pragma once
 #include "SCTask.hpp"
+#include "GetMemberEvent.hpp"
 
 // イベントの宣言
-wxDECLARE_EVENT(myEVT_THREAD_POST_MESSAGE, wxThreadEvent);
+wxDECLARE_EVENT(myEVT_THREAD_GET_MEMBER, CGetMemberEvent);
 
-// 別スレッドでコメントの投稿を行う
-class CPostMessageTask : public CSCTask
+// メンバー取得を別スレッドで取得するためのタスク
+class CSCGetMemberTask : public CSCTask
 {
 private:
-
-    wxString m_postMessage; // 投稿するメッセージ
     wxString m_channel; // チャンネル名
 
 public:
-    CPostMessageTask(void);
-    ~CPostMessageTask(void);
+    CSCGetMemberTask(void);
+    ~CSCGetMemberTask(void);
 
     // 初期化を行う
     void init(wxEvtHandler* handler, const wxString& channel, 
         const wxString& basic);
-
-    // 投稿するメッセージをセット
-    void setMessage(const wxString& message);
 
 private:
 
@@ -31,3 +27,4 @@ private:
     // HTTPレスポンスを解析してイベントを作成する
     wxThreadEvent* parseHttpResponse(const std::string& responseBody);
 };
+

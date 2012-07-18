@@ -1,13 +1,13 @@
-﻿#include "GetStreamTask.hpp"
+﻿#include "SCGetStreamTask.hpp"
 
 using namespace std;
 
-CGetStreamTask::CGetStreamTask(void)
+CSCGetStreamTask::CSCGetStreamTask(void)
 {
 }
 
 
-CGetStreamTask::~CGetStreamTask(void)
+CSCGetStreamTask::~CSCGetStreamTask(void)
 {
 }
 
@@ -16,7 +16,7 @@ CGetStreamTask::~CGetStreamTask(void)
 
 
 // 初期化を行う
-void CGetStreamTask::init(wxEvtHandler* handler, const wxString& userName,
+void CSCGetStreamTask::init(wxEvtHandler* handler, const wxString& userName,
         const wxString& basic)
 {
     CSCTask::init(handler, basic);
@@ -28,7 +28,7 @@ void CGetStreamTask::init(wxEvtHandler* handler, const wxString& userName,
 
 
 // メインループ
-wxThread::ExitCode CGetStreamTask::Entry()
+wxThread::ExitCode CSCGetStreamTask::Entry()
 {
     // クライアントの初期化
     CSCClient* client = new CSCClient();
@@ -71,7 +71,7 @@ wxThread::ExitCode CGetStreamTask::Entry()
 
 
 // Streamの内容からイベントを作成する
-wxThreadEvent* CGetStreamTask::parseStream(const string& json)
+wxThreadEvent* CSCGetStreamTask::parseStream(const string& json)
 {
     // JSONのパース
     CSCJsonParser parser;

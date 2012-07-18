@@ -1,13 +1,13 @@
-﻿#include "JoinChannelTask.hpp"
+﻿#include "SCJoinChannelTask.hpp"
 
 using namespace std;
 
-CJoinChannelTask::CJoinChannelTask(void)
+CSCJoinChannelTask::CSCJoinChannelTask(void)
 {
 }
 
 
-CJoinChannelTask::~CJoinChannelTask(void)
+CSCJoinChannelTask::~CSCJoinChannelTask(void)
 {
 }
 
@@ -16,7 +16,7 @@ CJoinChannelTask::~CJoinChannelTask(void)
 
 
 // 行う処理をセット
-void CJoinChannelTask::init(wxEvtHandler* handler, const wxString& userName,
+void CSCJoinChannelTask::init(wxEvtHandler* handler, const wxString& userName,
     const wxString& channel, const wxString& basic)
 {
     CSCTask::init(handler, basic);
@@ -29,13 +29,13 @@ void CJoinChannelTask::init(wxEvtHandler* handler, const wxString& userName,
 
 
 // StarChatに対してリクエストを送信する
-void CJoinChannelTask::sendRequestToSC(CSCClient* client)
+void CSCJoinChannelTask::sendRequestToSC(CSCClient* client)
 {
     client->sendJoinRequest(m_channel, m_userName, m_basic);
 }
 
 // HTTPレスポンスを解析してイベントを作成する
-wxThreadEvent* CJoinChannelTask::parseHttpResponse(const string& responseBody)
+wxThreadEvent* CSCJoinChannelTask::parseHttpResponse(const string& responseBody)
 {
     // イベントの初期化
     CJoinEvent* event = new CJoinEvent();

@@ -1,21 +1,22 @@
 ﻿#pragma once
-#include "PostMessageTask.hpp"
-#include "GetChannelTask.hpp"
-#include "GetMessageTask.hpp"
-#include "GetMemberTask.hpp"
-#include "AuthTask.hpp"
-#include "JoinChannelTask.hpp"
-#include "PartChannelTask.hpp"
-#include "GetMemberInfoTask.hpp"
-#include "GetStreamTask.hpp"
+#include "SCPostMessageTask.hpp"
+#include "SCGetChannelTask.hpp"
+#include "SCGetMessageTask.hpp"
+#include "SCGetMemberTask.hpp"
+#include "SCAuthTask.hpp"
+#include "SCJoinChannelTask.hpp"
+#include "SCPartChannelTask.hpp"
+#include "SCGetMemberInfoTask.hpp"
+#include "SCGetStreamTask.hpp"
 
 // 通信部分を管理(通信結果をイベントとして返す)
 class CSCConnection
 {
 private:
 
-    CAuthTask* m_authTask; // ユーザ認証用タスク
-    CGetStreamTask* m_getStreamTask; // ストリーム受信タスク
+    CSCAuthTask* m_authTask; // ユーザ認証用タスク
+    CSCGetStreamTask* m_getStreamTask; // ストリーム受信タスク
+
 public:
 
     CSCConnection(void);

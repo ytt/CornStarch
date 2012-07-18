@@ -1,24 +1,23 @@
 ﻿#pragma once
 #include "SCTask.hpp"
-#include "AuthEvent.hpp"
 
 // イベントの宣言
-wxDECLARE_EVENT(myEVT_THREAD_GET_PING, CAuthEvent);
+wxDECLARE_EVENT(myEVT_THREAD_DELETE_PART, wxThreadEvent);
 
-// StarChatのユーザ認証を行うためのタスク
-class CAuthTask : public CSCTask
+// チャンネルから離脱するためのタスク
+class CSCPartChannelTask : public CSCTask
 {
 private:
-
     wxString m_userName; // ユーザ名
+    wxString m_channel; // チャンネル名
 
 public:
-    CAuthTask(void);
-    ~CAuthTask(void);
+    CSCPartChannelTask(void);
+    ~CSCPartChannelTask(void);
 
     // 初期化を行う
-    void init(wxEvtHandler* handler, const wxString& userName, 
-        const wxString& basic);
+    void init(wxEvtHandler* handler, const wxString& userName,
+        const wxString& channel, const wxString& basic);
 
 private:
 

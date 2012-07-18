@@ -17,14 +17,14 @@ wxDECLARE_EVENT(myEVT_THREAD_STREAM_CH_UPDATE, CChannelStreamEvent);
 wxDECLARE_EVENT(myEVT_THREAD_STREAM_USER_UPDATE, CUserStreamEvent);
 
 // ストリームを受信するためのタスク
-class CGetStreamTask : public CSCTask
+class CSCGetStreamTask : public CSCTask
 {
 private:
     wxString m_userName; // ユーザ名
 
 public:
-    CGetStreamTask(void);
-    ~CGetStreamTask(void);
+    CSCGetStreamTask(void);
+    ~CSCGetStreamTask(void);
 
     // 初期化を行う
     void init(wxEvtHandler* handler, const wxString& userName,

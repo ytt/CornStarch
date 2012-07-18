@@ -1,13 +1,13 @@
-﻿#include "AuthTask.hpp"
+﻿#include "SCAuthTask.hpp"
 
 using namespace std;
 
-CAuthTask::CAuthTask(void)
+CSCAuthTask::CSCAuthTask(void)
 {
 }
 
 
-CAuthTask::~CAuthTask(void)
+CSCAuthTask::~CSCAuthTask(void)
 {
 }
 
@@ -16,7 +16,7 @@ CAuthTask::~CAuthTask(void)
 
 
 // 初期化を行う
-void CAuthTask::init(wxEvtHandler* handler, const wxString& userName,
+void CSCAuthTask::init(wxEvtHandler* handler, const wxString& userName,
     const wxString& basic)
 {
     CSCTask::init(handler, basic);
@@ -28,14 +28,14 @@ void CAuthTask::init(wxEvtHandler* handler, const wxString& userName,
 
 
 // StarChatに対してリクエストを送信する
-void CAuthTask::sendRequestToSC(CSCClient* client)
+void CSCAuthTask::sendRequestToSC(CSCClient* client)
 {
     // GETリクエストの送信
     client->sendPingRequest(m_userName, m_basic);
 }
 
 // HTTPレスポンスを解析してイベントを作成する
-wxThreadEvent* CAuthTask::parseHttpResponse(const string& responseBody)
+wxThreadEvent* CSCAuthTask::parseHttpResponse(const string& responseBody)
 {
     // レスポンスボディの内容を基に、イベントをセットする
     CSCJsonParser parser;

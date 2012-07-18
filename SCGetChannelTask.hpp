@@ -6,14 +6,14 @@
 wxDECLARE_EVENT(myEVT_THREAD_GET_CHANNEL, CGetChannelEvent);
 
 // チャンネルを別スレッドで取得するためのタスク
-class CGetChannelTask : public CSCTask
+class CSCGetChannelTask : public CSCTask
 {
 private:
     wxString m_userName; // ユーザ名
 
 public:
-    CGetChannelTask(void);
-    ~CGetChannelTask(void);
+    CSCGetChannelTask(void);
+    ~CSCGetChannelTask(void);
 
     // 初期化を行う
     void init(wxEvtHandler* handler, const wxString& userName, 
