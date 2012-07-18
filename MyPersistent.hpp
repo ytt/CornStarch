@@ -4,6 +4,10 @@
 
 #ifdef _WIN32
 #include <wx/msw/registry.h>
+#else
+#include <map>
+#include <fstream>
+#include <sys/stat.h>
 #endif
 
 // 永続化情報を管理するクラス

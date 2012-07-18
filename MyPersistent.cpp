@@ -149,12 +149,12 @@ void CPersistentInfoLinux::deleteInfo(const wxString& key)
 
 // mac
 #else
-CPersistentInfoMac::CPersistentInfoMac(void)
+CMyPersistent::CMyPersistent(void)
 {
 }
 
 
-CPersistentInfoMac::~CPersistentInfoMac(void)
+CMyPersistent::~CMyPersistent(void)
 {
 }
 
@@ -163,7 +163,7 @@ CPersistentInfoMac::~CPersistentInfoMac(void)
 
 
 // 初期化を行う
-void CPersistentInfoMac::init(void)
+void CMyPersistent::init(void)
 {
     // ファイルが開けない(存在しない)
     m_ifs.open("./.config");
@@ -177,7 +177,7 @@ void CPersistentInfoMac::init(void)
         // ファイルが存在した場合
         while (!m_ifs.eof()){
             wxString key, value;
-            m_ifs >> key >> value;
+            m_ifs >> string(key.mb_str(wxConvUTF8)) >> string(value.mb_str(wxConvUTF8));
             m_value[key] = value;
         }
         m_ifs.close();
@@ -185,19 +185,19 @@ void CPersistentInfoMac::init(void)
     }}
 
 // 情報を保存する
-void CPersistentInfoMac::saveInfo(const wxString& key, const wxString& value)
+void CMyPersistent::saveInfo(const wxString& key, const wxString& value)
 {
     m_value[key] = value;
 }
 
 // キーから情報を読み込む
-wxString CPersistentInfoMac::loadInfo(const wxString& key)
+wxString CMyPersistent::loadInfo(const wxString& key)
 {
     return m_value[key];
 }
 
 // keyが保存されているか
-bool CPersistentInfoMac::isKeySaved(const wxString& key) const
+bool CMyPersistent::isKeySaved(const wxString& key) const
 {
     if (m_value.find(key) == m_value.end()){
         return false;
@@ -206,7 +206,7 @@ bool CPersistentInfoMac::isKeySaved(const wxString& key) const
 }
 
 // 保存情報を削除する
-void CPersistentInfoMac::deleteInfo(const wxString& key)
+void CMyPersistent::deleteInfo(const wxString& key)
 {
     m_value.clear();
 }
