@@ -29,6 +29,7 @@ CMainWindow::~CMainWindow(void)
     delete  m_persist;
 }
 
+
 //////////////////////////////////////////////////////////////////////
 
 
@@ -277,31 +278,33 @@ void CMainWindow::OnSize(wxSizeEvent& event)
 // 投稿ペインでEnterキーを押下
 void CMainWindow::onEnter(wxCommandEvent& event)
 {
+    wxString message = event.GetString();
+
+    // 投稿画面をクリア
+    m_view->clearPostPaneText();
+
     // 何も文がないとき
-    if (event.GetString() == ""){
+    if (message == ""){
         return;
     }
 
     // ログイン済みの時
-    if (m_user->isLogin()){
-
-        // メッセージ投稿タスクの開始
-        wxString message(event.GetString().mb_str(wxConvUTF8));
-        wxString channel = m_user->getChannelString();
-        m_connect->startPostMessageTask(GetEventHandler(), message, channel, m_user->getBasic());
-
-        // メッセージを保存
-        CMessageData data(-1, m_user->getUserName(), message, channel, time(NULL));
-        m_channel->pushMessage(data.m_channel, data);
-        m_logHolder->pushMessageLog(data, m_user->getNickName());
-
-        // 表示の更新
-        m_view->displayLogs(m_logHolder->getLogs());
-        updateMessageView(channel);
+    if (!m_user->isLogin()){
+        return;
     }
 
-    // 投稿画面をクリア
-    m_view->clearPostPaneText();
+    // メッセージ投稿タスクの開始
+    wxString channel = m_user->getChannelString();
+    m_connect->startPostMessageTask(GetEventHandler(), message, channel, m_user->getBasic());
+
+    // メッセージを保存
+    CMessageData data(-1, m_user->getUserName(), message, channel, time(NULL));
+    m_channel->pushMessage(data.m_channel, data);
+    m_logHolder->pushMessageLog(data, m_user->getNickName());
+
+    // 表示の更新
+    m_view->displayLogs(m_logHolder->getLogs());
+    updateMessageView(channel);
 }
 
 // チャンネル選択時

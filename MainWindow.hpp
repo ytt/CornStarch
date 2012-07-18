@@ -5,7 +5,6 @@
 #include "SCChannelHolder.hpp"
 #include "SCUser.hpp"
 #include "SCNickTable.hpp"
-#include "SubscribeData.hpp"
 #include "MyPersistent.hpp"
 
 // ビューコントローラとなるウィンドウクラス
@@ -24,7 +23,7 @@ private:
     CSCUser* m_user; // ユーザ情報
     CSCNickTable* m_nickTable; // ニックネームテーブル
 
-    // 便利クラス
+    // 汎用クラス
     CMyPersistent* m_persist; // 永続化を扱う
 
     // wxWindowイベントを処理させたいクラスに利用するマクロ
