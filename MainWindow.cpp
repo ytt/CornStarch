@@ -294,16 +294,14 @@ void CMainWindow::onGetChannels(CGetChannelEvent& event)
 
     // 表示の更新
     updateChannelView(m_contents->getCurrentChannel());
+    updateMemberView(m_contents->getCurrentChannel());
+    updateMessageView(m_contents->getCurrentChannel());
 }
 
 // チャンネル参加時
 void CMainWindow::onJoinChannel(CJoinEvent& event)
 {
     m_contents->onJoinChannel(event.getChannel().m_name);
-
-    // 表示の更新
-    updateMemberView(m_contents->getCurrentChannel());
-    updateMessageView(m_contents->getCurrentChannel());
 }
 
 // チャンネル離脱時

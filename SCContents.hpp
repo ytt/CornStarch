@@ -13,7 +13,6 @@ private:
     wxEvtHandler* m_handler;
 
     // StarChatのデータ部
-    static const wxString DEFAULT_CHANNEL; // 主チャンネル
     CSCConnection* m_connect; // 通信を司るクラス
     CSCChannelHolder* m_channel; // チャンネル情報を保持
     CSCUser* m_user; // ユーザ情報
@@ -28,12 +27,6 @@ public:
 
     // 初期化を行う
     void init(wxEvtHandler* handler);
-
-    // チャンネルのメッセージとメンバーを受信し終えたか
-    bool hasRecvdChannelStatus(const wxString& channel) const;
-
-    // チャンネル一覧を受信したか
-    bool hasRecvdChannelList(void) const;
 
     // ユーザがログインしているか
     bool isUserLogin(void) const;

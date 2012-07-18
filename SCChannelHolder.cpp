@@ -114,6 +114,16 @@ void CSCChannelHolder::deleteChannels(void)
 
 }
 
+// 一番頭のチャンネルを取得する
+wxString CSCChannelHolder::getFirstChannel(void)
+{
+    if (m_channels.size() == 0){
+        return "";
+    }
+
+    return m_channels.begin()->first;
+}
+
 
 /////////////////////////////////////////////////////////////
 

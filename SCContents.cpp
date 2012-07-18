@@ -1,6 +1,5 @@
 #include "SCContents.hpp"
 
-const wxString CSCContents::DEFAULT_CHANNEL = "Lobby"; // 主チャンネル
 using namespace std;
 
 CSCContents::CSCContents(void) : m_handler(NULL), m_persist(NULL), 
@@ -40,7 +39,7 @@ void CSCContents::init(wxEvtHandler* handler)
     // ユーザ情報の初期化
     m_user = new CSCUser();
     m_user->init();
-    m_user->setChannel(DEFAULT_CHANNEL);
+    m_user->setChannel("");
 
     // ニックネームテーブルの初期化
     m_nickTable = new CSCNickTable();
@@ -61,18 +60,6 @@ void CSCContents::init(wxEvtHandler* handler)
         // 認証タスクを開始する
         m_connect->startAuthTask(m_handler, m_user->getUserName(), m_user->getBasic());
     }
-}
-
-// チャンネルのメッセージとメンバーを受信し終えたか
-bool CSCContents::hasRecvdChannelStatus(const wxString& channel) const
-{
-    return m_channel->hasReceivedMessage(channel) && m_channel->hasReceivedMember(channel);
-}
-
-// チャンネル一覧を受信したか
-bool CSCContents::hasRecvdChannelList(void) const
-{
-    return m_channel->hasReceivedChannel();
 }
 
 // ユーザがログインしているか
@@ -292,6 +279,10 @@ void CSCContents::onGetMembers(const vector<CMemberData*>& members)
 void CSCContents::onGetChannels(const vector<CChannelData*>& channels)
 {
     m_channel->setChannels(channels);
+
+    if (m_user->getChannelString() == ""){
+        m_user->setChannel(m_channel->getFirstChannel());
+    }
 }
 
 // チャンネル参加成功時
@@ -312,7 +303,7 @@ void CSCContents::onPartChannel(const wxString& channel)
     m_channel->popChannel(channel);
 
     // ユーザの現在のチャンネルを変更
-    m_user->setChannel(DEFAULT_CHANNEL);
+    m_user->setChannel(m_channel->getFirstChannel());
 }
 
 // メンバー情報を取得した場合
@@ -373,7 +364,6 @@ void CSCContents::onGetJoinStream(const wxString& channel, const wxString& name)
         m_connect->startGetChannelTask(
             m_handler, m_user->getUserName(), m_user->getBasic());
     }
-
 }
 
 // チャンネル離脱ストリームを受信
