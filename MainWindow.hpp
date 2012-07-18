@@ -1,11 +1,7 @@
 ﻿#pragma once
 #include "MainView.hpp"
 #include "MainLogHolder.hpp"
-#include "SCConnection.hpp"
-#include "SCChannelHolder.hpp"
-#include "SCUser.hpp"
-#include "SCNickTable.hpp"
-#include "MyPersistent.hpp"
+#include "SCContents.hpp"
 
 // ビューコントローラとなるウィンドウクラス
 class CMainWindow : public wxFrame
@@ -17,14 +13,7 @@ private:
     CMainLogHolder* m_logHolder; // チャットのログを保持
 
     // StarChat
-    static const wxString DEFAULT_CHANNEL; // 主チャンネル
-    CSCConnection* m_connect; // 通信を司るクラス
-    CSCChannelHolder* m_channel; // チャンネル情報を保持
-    CSCUser* m_user; // ユーザ情報
-    CSCNickTable* m_nickTable; // ニックネームテーブル
-
-    // 汎用クラス
-    CMyPersistent* m_persist; // 永続化を扱う
+    CSCContents* m_contents; // スターチャットのコンテンツを管理
 
     // wxWindowイベントを処理させたいクラスに利用するマクロ
     DECLARE_EVENT_TABLE()
